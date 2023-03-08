@@ -1,20 +1,17 @@
-import consts
-import main
+from consts import CONST
 
 def do_math(val1, val2, operator):
-    match main.operator == consts.const:
-        case (add,_):
-            result = val1 + val2
-            return result
+    if operator == CONST[0]:
+        return val1 + val2
 
-        case (_,sub):
-            result = val1 - val2
-            return result
+    elif operator == CONST[1]:
+        return val1 - val2
 
-        case (_,_,mul):
-            result = val1 * val2
-            return result
+    elif operator == CONST[2]:
+        return val1 * val2
 
-        case (_,_,_,div):
-            result = val1 / val2
-            return result
+    elif operator == CONST[3]:
+        return val1 / val2
+
+    else:
+        print("Недопустимое значение")
