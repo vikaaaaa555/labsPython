@@ -18,8 +18,13 @@ def count_words(txt: str) -> int:
 
 
 def average_length_of_sentence(txt: str) -> int:
-    return round(count_words(txt) / all_sentences(txt))
+    return round(count_characters(txt) / all_sentences(txt))
 #средняя длина предложения
+
+
+def average_lenght_of_words(txt: str) -> int:
+    return round(count_characters(txt) / count_words(txt))
+#средняя длина слова
 
 
 def delete_numbers(txt: str) -> str:
@@ -27,4 +32,10 @@ def delete_numbers(txt: str) -> str:
 #удалить числа
 
 
-def
+def count_characters(txt: str) -> int:
+    new_txt = delete_numbers(txt)
+
+    return len(re.findall(constans.CHARACTERS, new_txt))
+#количество символов
+
+
