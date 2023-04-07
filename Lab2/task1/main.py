@@ -1,16 +1,28 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+import calculate
+import constans
+from pathlib import WindowsPath
+from wsl_pathlib.path import WslPath
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+def open_file(path: WindowsPath) -> str:
+    with path.open() as f:
+        text = f.read()
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    return text
+
+def main():
+    # text = input("Input some text: ")
+    w = WslPath("C:\\Users\\Viktoriya\\Desktop\\example.txt")
+
+    print(open_file(w))
+
+
+
+
+
+
+    #print(calculate.all_sentences(f))
+
+
+if __name__ == "__main__":
+    main()
