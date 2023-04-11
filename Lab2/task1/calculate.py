@@ -3,13 +3,12 @@ import re
 
 
 def all_sentences(txt: str) -> int:
-    txt = txt.lower()
     sentences = len(re.findall(constans.ALL_SENTENCES_PATTERN, txt))
 
     for i in constans.ONE_LETTERS_ABBRIVATION:
         sentences -= txt.count(i)
 
-    for i in constans.TWO_LETTERS_ABBRIVATION:
+    for i in constans.FEW_LETTERS_ABBRIVATION:
         sentences -= txt.count(i)
 
     return sentences
@@ -48,3 +47,10 @@ def count_characters(txt: str) -> int:
     # количество символов
 
 
+def generate_ngrams(txt, WordsToCombine):
+     words = txt.split()
+     output = []
+     for i in range(len(words) - WordsToCombine+1):
+         output.append(words[i:i+WordsToCombine])
+     return output
+    # n-grams
