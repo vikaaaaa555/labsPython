@@ -6,13 +6,11 @@ NUMBERS_PATTERN = r'\s\d+\s'
 CHARACTERS_PATTERN = r'\w'
 EDWARD = "Beautiful? It's a skin of a killer, Bella! I'm a killer."
 SOME_TEXT = "ahuha111 1111 1111ahuha111 ahdsh111jcddj"
+PATTERN_FOR_NGRAMS = r'[^\w\s]'
 
 ONE_LETTERS_ABBRIVATION = (
-    r'Mr\.', r'Ms\.', r'Mrs\.', r'Dr\.', r'Jr\.',
-    r'Sr\.', r'ft\.', r'etc\.', r'inc\.', r'yr\.',
-    r'Smth\.', r'Smb\.'
+    'Mr.', 'Ms.', 'Mrs.', 'Dr.', 'Jr.', 'Sr.', 'ft.', 'etc.', 'inc.', 'yr.', 'Smth.', 'Smb.', 'vs.'
 )
-TWO_LETTERS_ABBRIVATION = (
-    r'i\.e\.', r'e\.g\.', r'a\.d\.', r'b\.c\.',
-    r'c\.e\.', r'b\.c\.e\.', r'a\.m\.', r'p\.m\.', r'vs\.'
+FEW_LETTERS_ABBRIVATION = (
+    'i.e.', 'e.g.', 'a.d.', 'b.c.', 'c.e.', 'b.c.e.', 'a.m.', 'p.m.'
 )
