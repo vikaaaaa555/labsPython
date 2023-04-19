@@ -1,3 +1,4 @@
+import collections
 import constans
 import re
 
@@ -26,12 +27,18 @@ def count_words(txt: str) -> int:
 
 
 def average_length_of_sentence(txt: str) -> int:
-    return round(count_characters(txt) / all_sentences(txt))
+    if all_sentences(txt) == 0:
+        return 0
+    else:
+        return round(count_characters(txt) / all_sentences(txt))
     # средняя длина предложения
 
 
-def average_lenght_of_words(txt: str) -> int:
-    return round(count_characters(txt) / count_words(txt))
+def average_length_of_words(txt: str) -> int:
+    if all_sentences(txt) == 0:
+        return 0
+    else:
+        return round(count_characters(txt) / count_words(txt))
     # средняя длина слова
 
 
@@ -47,10 +54,12 @@ def count_characters(txt: str) -> int:
     # количество символов
 
 
-def generate_ngrams(txt, WordsToCombine):
-     words = txt.split()
-     output = []
-     for i in range(len(words) - WordsToCombine+1):
-         output.append(words[i:i+WordsToCombine])
-     return output
+def get_top_ngrams(txt, n = 4, k = 10) -> str:
+    txt = re.sub(constans.PATTERN_FOR_NGRAMS, '', txt).lower()
+    words = txt.split()
+
+    ngrams = (tuple(words[i:i + n]) for i in range(len(words) - n + 1))
+    top_ngrams = collections.Counter(ngrams).most_common(k)
+
+    return str(top_ngrams)
     # n-grams
