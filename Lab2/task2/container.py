@@ -44,3 +44,17 @@ class UniqueContainer:
             print("The container is empty")
         else:
             print(self.data[self.username])
+
+
+    def grep(self, regex: re):
+        if self.username not in self.data:
+            print("The container is empty")
+
+        found_reg = []
+        for element in self.data[self.username]:
+            if re.search(regex, element):
+                found_reg.append(element)
+        if found_reg:
+            print(", ".join(found_reg))
+
+
