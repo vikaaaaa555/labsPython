@@ -58,3 +58,25 @@ class UniqueContainer:
             print(", ".join(found_reg))
 
 
+    def load(self):
+        temp = self.data
+        with open("data.json", "rb") as f:
+            self.data = json.load(f)
+
+        if self.username in self.username and self.username in temp:
+            if temp[self.username] != self.data[self.username]:
+                self.add(*temp[self.username])
+
+
+    def save(self):
+        if not self.loaded:
+            self.load()
+
+        if self.username not in self.data:
+            self.data[self.username] = []
+        with open("data.json", "wr") as f:
+            json.dump(self.data, f)
+
+
+    def load_username(self):
+        with open("data.json", "rb") as f
