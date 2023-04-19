@@ -21,7 +21,7 @@ class UniqueContainer:
     def remove(self, arg):
         self.username.discard(arg)
         if self.username not in self.data:
-            print("Container is empty")
+            print("The container is empty")
         elif arg not in self.data:
             print("These elements are not in the container")
         else:
@@ -29,3 +29,18 @@ class UniqueContainer:
 
 
     def find(self, *args):
+        if self.username not in self.data:
+            print("The container is empty")
+
+        find_args = [arg for arg in args if arg in self.data[self.username]]
+        if find_args == 0:
+            print("These elements are not in the container" )
+        else:
+            print("Found elements: ", *find_args)
+
+
+    def list(self):
+        if self.username not in self.data:
+            print("The container is empty")
+        else:
+            print(self.data[self.username])
