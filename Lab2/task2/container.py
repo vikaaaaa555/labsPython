@@ -3,9 +3,9 @@ import json
 
 
 class UniqueContainer:
-    def __int__(self, username):
+    def __init__(self, username):
         self.username = username
-        self.data = {}
+        self.data = dict()
         self.loaded = False
 
 
@@ -19,17 +19,16 @@ class UniqueContainer:
 
 
     def remove(self, arg):
-        self.username.discard(arg)
-        if self.username not in self.data:
+        if self.username not in self.data or not self.data[self.username]:
             print("The container is empty")
-        elif arg not in self.data:
+        elif arg not in self.data[self.username]:
             print("These elements are not in the container")
         else:
             self.data[self.username].remove(arg)
 
 
     def find(self, *args):
-        if self.username not in self.data:
+        if self.username not in self.data or not self.data[self.username]:
             print("The container is empty")
 
         find_args = [arg for arg in args if arg in self.data[self.username]]
@@ -40,14 +39,14 @@ class UniqueContainer:
 
 
     def list(self):
-        if self.username not in self.data:
+        if self.username not in self.data or not self.data[self.username]:
             print("The container is empty")
         else:
             print(self.data[self.username])
 
 
     def grep(self, regex: re):
-        if self.username not in self.data:
+        if self.username not in self.data or not self.data[self.username]:
             print("The container is empty")
 
         found_reg = []
@@ -59,24 +58,39 @@ class UniqueContainer:
 
 
     def load(self):
+        self.loaded = True
         temp = self.data
-        with open("data.json", "rb") as f:
+        with open("data.json", "r") as f:
             self.data = json.load(f)
 
-        if self.username in self.username and self.username in temp:
+        if self.username in self.data and self.username in temp:
             if temp[self.username] != self.data[self.username]:
                 self.add(*temp[self.username])
 
 
     def save(self):
         if not self.loaded:
-            self.load()
+            temp_data = self.data
+            with open('data.json', 'r') as file:
+                self.data = json.load(file)
+            if self.username in temp_data and self.username in self.data:
+                if temp_data[self.username] != self.data[self.username]:
+                    self.add(*temp_data[self.username])
 
-        if self.username not in self.data:
+        if self.username not in self.data or not self.data[self.username]:
             self.data[self.username] = []
-        with open("data.json", "wr") as f:
+        with open("data.json", "w") as f:
             json.dump(self.data, f)
 
 
     def load_username(self):
-        with open("data.json", "rb") as f
+        with open("data.json", "r") as f:
+            self.data = json.load(f)
+
+        if self.username in self.data:
+            self.data[self.username] = []
+
+
+    def switch(self, username):
+        self.username = username
+        self.data = {}
