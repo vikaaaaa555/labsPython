@@ -1,12 +1,11 @@
 from container import UniqueContainer
-import keyboard
 
 
 def main():
     print("---------------------------------------------------------------------\n"
         "add(arguments) – add one or more elements to the container\n"
         "remove(argument) – delete key from container"
-        "find(arguments) – check if the element is presented in the container\n"
+        "find(argumentрs) – check if the element is presented in the container\n"
         "list – print all elements of container\n"
         "grep(regex) – check the value in the container by regular expression\n"
         "save - save container to file\n"
