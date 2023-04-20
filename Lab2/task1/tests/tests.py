@@ -1,5 +1,5 @@
 import unittest
-import calculate
+import task1.calculate as calculate
 
 
 class TestSentences(unittest.TestCase):
