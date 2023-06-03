@@ -14,8 +14,12 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
+from django.views.generic import RedirectView
+
 from fitness_club.views import index
 
 urlpatterns = [
@@ -23,3 +27,9 @@ urlpatterns = [
     path('fitness_club/', include('fitness_club.urls')),
     path('', index, name='index')
 ]
+
+urlpatterns += [
+    path('', RedirectView.as_view(url='/fitness_club/', permanent=True))
+]
+
+urlpatterns+= static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
