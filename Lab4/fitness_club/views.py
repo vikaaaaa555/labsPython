@@ -3,4 +3,7 @@ from django.http import HttpResponse
 
 
 def index(request):
-    return HttpResponse("Hello, world.")
+    return render(request, 'fitness_club/index.html')
+
+def club_cards(request):
+    return HttpResponse("<h4>Info about club cards<h4>")
