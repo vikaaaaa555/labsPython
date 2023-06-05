@@ -1,0 +1,39 @@
+body {
+    background: #101010;
+}
+
+aside {
+    float: left;
+    color: plum;
+    background: #202020;
+    width: 15%;
+    height: 100vh;
+    padding: 2.5%;
+    border-right: 5px solid #303030;
+}
+
+aside ul {list-style: none}
+aside ul li, a {
+    color: plum;
+    display: block;
+    margin-top: 10px;
+    transition: transform .4s ease;
+    text-decoration: none;
+}
+
+aside ul li:hover, aside ul a:hover {
+    color: white;
+    text-decoration: none;
+    transform: scale(1.05);
+}
+
+main .features {
+    float: left;
+    color: white;
+    margin-top: 60px;
+    text-align: center;
+    width: 75%;
+}
+
+main .features h1 {font-size: 50px}
+main .features p {margin: 20px auto; max-width: 1000px}
