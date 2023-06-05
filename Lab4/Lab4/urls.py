@@ -26,7 +26,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('fitness_club/', include('fitness_club.urls')),
     path('', index, name='index')
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 urlpatterns += [
     path('', RedirectView.as_view(url='/fitness_club/', permanent=True))
