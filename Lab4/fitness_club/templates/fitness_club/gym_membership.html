@@ -1,9 +1,22 @@
 {% extends 'fitness_club/layout.html' %}
 
 {% block title %}
-    <h1>Memberships</h1>
+    <h1>Membership</h1>
 {% endblock %}
 
 {% block content %}
-    <h1>Memberships</h1>
+    <div class="features">
+        <h1>Membership</h1>
+        {% if memberships %}
+            {% for el in memberships %}
+                <div class="alert alert-warning">
+                    <h3>{{ el.name }}</h3>
+                    <p>{{ el.description }}</p>
+                    <a href="{% url 'shopping_cart' %}"style="color: white; background: #1b1b1b; width: 5%">Buy</a>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>Memberships not found</p>
+        {% endif %}
+    </div>
 {% endblock %}
