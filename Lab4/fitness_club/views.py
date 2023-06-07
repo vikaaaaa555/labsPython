@@ -1,61 +1,49 @@
 import random
 import requests
 from django.contrib.auth.forms import UserCreationForm
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView
 from .models import *
 
+MEM1 = 0
+MEM2 = 0
+MEM3 = 0
 
 class FitnessClubHome(ListView):
     model = Group
     template_name = 'fitness_club/index.html'
     context_object_name = 'groups'
-    ordering = ['name']
+    ordering = ('name',)
 
-
-# def index(request):
-#     groups = Group.objects.order_by('name')
-#
-#     context = {
-#         'groups': groups,
-#     }
-#     return render(request, 'fitness_club/index.html', context)
+class FitnessClubHomeAnonimus(ListView):
+    model = Group
+    template_name = 'fitness_club/home_anonimus.html'
+    context_object_name = 'groups'
+    ordering = ('name',)
 
 class MembershipView(ListView):
     model = Membership
     template_name = 'fitness_club/gym_membership.html'
     context_object_name = 'memberships'
 
-# def gym_memberships(request):
-#     #memberships = Membership.objects.all()
-#     memberships = Membership.objects.order_by('name')
-#     #mem = Membership.objects.all()
-#
-#     context = {
-#         'memberships': memberships,
-#         #'mem': mem
-#     }
-#
-#     return render(request, 'fitness_club/gym_membership.html', context)
+class MembershipAnonimusView(ListView):
+    model = Membership
+    template_name = 'fitness_club/memberships_anonimus.html'
+    context_object_name = 'memberships'
 
 class InstructorsView(ListView):
     model = Instructor
     template_name = 'fitness_club/instructors.html'
     context_object_name = 'instructor'
-    ordering = ['name']
+    ordering = ('name',)
 
-# def instructors(request):
-#     instructor = Instructor.objects.order_by('name')
-#
-#     context = {
-#         'instructor': instructor
-#     }
-#
-#     return render(request, 'fitness_club/instructors.html', context)
-
-
+class InstructorsAnonimusView(ListView):
+    model = Instructor
+    template_name = 'fitness_club/instructors_anonimus.html'
+    context_object_name = 'instructor'
+    ordering = ('name',)
 
 def services(request):
     response = requests.get('https://dog.ceo/api/breeds/image/random')
@@ -69,13 +57,50 @@ def services(request):
         'image_url': image_url,
         'random_fact': random_fact
     }
-
     return render(request, 'fitness_club/services.html',  context)
 
+def services_anonimus(request):
+    response = requests.get('https://dog.ceo/api/breeds/image/random')
+    image_url = response.json()['message']
+
+    response = requests.get('https://cat-fact.herokuapp.com/facts')
+    facts = response.json()
+    random_fact = random.choice(facts)
+
+    context = {
+        'image_url': image_url,
+        'random_fact': random_fact
+    }
+    return render(request, 'fitness_club/services_anonimus.html',  context)
+
+# class ShoppingCardView(DetailView):
+#     model = Membership
+#     template_name = 'fitness_club/shopping_cart.html'
+#     pk_url_kwarg = 'membership_id'
+#     context_object_name = 'pushcase'
+#
+#
+#
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context['memberships'] = Membership.objects.order_by('name')
+#         return context
+
 def shopping_cart(request, membership_id):
-    memberships = Membership.objects.order_by('name')
+    memberships = Membership.objects.all()
     pushcase = Membership.objects.get(pk=membership_id)
-    return render(request, 'fitness_club/shopping_cart.html', {'memberships':memberships, 'pushcase': pushcase})
+    # for el in memberships:
+    #     if el.name == pushcase.name:
+    #         el.count += 1
+    #         el.save()
+    #         pushcase.save()
+
+    context = {
+        'memberships':memberships,
+        'pushcase': pushcase
+    }
+    return render(request, 'fitness_club/shopping_cart.html', context)
+
 
 def home(request):
     return render(request,"fitness_club/home.html")
