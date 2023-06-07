@@ -20,12 +20,11 @@ from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import RedirectView
 
-from fitness_club.views import index
-
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('fitness_club/', include('fitness_club.urls')),
-    path('', index, name='index')
+    path('', include('fitness_club.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
+
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 urlpatterns += [
