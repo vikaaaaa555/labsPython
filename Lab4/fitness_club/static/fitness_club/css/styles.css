@@ -37,3 +37,24 @@ main .features {
 
 main .features h1 {font-size: 50px}
 main .features p {margin: 20px auto; max-width: 1000px}
+
+.alert-warning {
+    background: plum;
+    float: left;
+    clear: both;
+    width: 600px;
+    margin: 20px 24%;
+    text-align: left;
+}
+
+.alert-info {
+    background: #5A916A;
+    color: plum;
+    float: left;
+    clear: both;
+    width: 100%;
+    margin: 20px;
+    text-align: left;
+}
+
+
