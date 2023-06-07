@@ -1,7 +1,7 @@
 {% extends 'fitness_club/layout.html' %}
 
 {% block title %}
-    <h1>Instructors</h1>
+    Instructors
 {% endblock %}
 
 {% block content %}
@@ -9,6 +9,9 @@
         <h1>Instructors</h1>
         {% if instructor %}
             {% for el in instructor %}
+                {% if el.photo %}
+                    <p><img class='img-article-left thumb' src="{{ el.photo.url }}"></p>
+                {% endif %}
                 <div class="alert alert-warning">
                     <h3>{{ el.name }}</h3>
                     <p>{{ el.specialization }}</p>

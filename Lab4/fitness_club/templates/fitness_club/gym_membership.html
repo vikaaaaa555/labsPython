@@ -1,18 +1,21 @@
 {% extends 'fitness_club/layout.html' %}
 
 {% block title %}
-    <h1>Membership</h1>
+    Memberships
 {% endblock %}
 
 {% block content %}
     <div class="features">
-        <h1>Membership</h1>
+        <h1>Memberships</h1>
         {% if memberships %}
             {% for el in memberships %}
                 <div class="alert alert-warning">
                     <h3>{{ el.name }}</h3>
                     <p>{{ el.description }}</p>
-                    <a href="{% url 'shopping_cart' %}"style="color: white; background: #1b1b1b; width: 5%">Buy</a>
+                    <p class="link-read-membership"><a href="{{el.get_absolute_url}}";
+                                                       style="background: #1b1b1b;
+                                                       color: white;
+                                                       width: 5%">Buy</a></p>
                 </div>
             {% endfor %}
         {% else %}

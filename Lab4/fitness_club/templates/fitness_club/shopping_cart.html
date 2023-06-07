@@ -1,10 +1,12 @@
 {% extends 'fitness_club/layout.html' %}
 
 {% block title %}
-    <h1>Memberships</h1>
+    Shopping card
 {% endblock %}
 
 {% block content %}
-        <h1>Thank you for your purchase!</h1>
-        <p>Your order has been placed</p>
+    <div class="features">
+        <h1>Thanks for your order!</h1>
+        <h2>You bought {{ pushcase.name }}</h2>
+    </div>
 {% endblock %}
